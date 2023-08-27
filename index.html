@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: rgb(171, 56, 247);
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      font-size: 16px;
+    }
+    
+    input[type="submit"] {
+      width: 420px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #ff57cd;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #090a09;
+    }
+    
+    .delete-btn {
+      color: #ff0000;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    <form id="todo-form">
+      <input type="text" id="todo-input" placeholder="Enter a task" required>
+      <input type="submit" value="Add Task">
+    </form>
+    <ul id="todo-list"></ul>
+  </div>
+
+  <script>
+   
+    function addTask() {
+      var todoInput = document.getElementById("todo-input");
+      var todoList = document.getElementById("todo-list");
+
+      if (todoInput.value === "") {
+        return;
+      }
+
+      var task = document.createElement("li");
+      task.innerHTML = todoInput.value;
+      todoList.appendChild(task);
+
+      var deleteBtn = document.createElement("span");
+      deleteBtn.innerHTML = "&#10006;";
+      deleteBtn.className = "delete-btn";
+      task.appendChild(deleteBtn);
+
+      todoInput.value = "";
+
+      deleteBtn.addEventListener("click", function () {
+        this.parentElement.remove();
+      });
+    }
+    document.getElementById("todo-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      addTask();
+    });
+  </script>
+</body>
+</html>
